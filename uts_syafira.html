@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Program Gaji</title>
+</head>
+<body>
+    <h1>Hitung THR</h1>
+  <label for="gajiPokok">Gaji Pokok:</label><br>
+  <input type="number" id="gajiPokok" name="gajiPokok"><br>
+  <label for="tunjanganTetap">Tunjangan Tetap:</label><br>
+  <input type="number" id="tunjanganTetap" name="tunjanganTetap"><br>
+  <label for="masaKerja">Masa Kerja (dalam bulan):</label><br>
+  <input type="number" id="masaKerja" name="masaKerja"><br><br>
+
+  <button onclick="hitungTHR()">Pembayaran</button>
+
+  <p id="result"></p>
+
+  <script>
+    function hitungTHR() {
+      // ambil input dari user
+      var gajiPokok = document.getElementById("gajiPokok").value;
+      var tunjanganTetap = document.getElementById("tunjanganTetap").value;
+      var masaKerja = document.getElementById("masaKerja").value;
+
+      // hitung total gaji
+      var totalGaji = parseInt(gajiPokok) + parseInt(tunjanganTetap);
+
+      // hitung THR
+      var thr = 0;
+      if (masaKerja >= 12) {
+        thr = totalGaji;
+      } else {
+        thr = (masaKerja / 12) * totalGaji;
+      }
+
+      // hitung PPH ps. 21
+      var pph = 0;
+      if (thr > 4500000) {
+        pph = (thr - 4500000) * 0.05;
+      }
+
+      // hitung total pembayaran
+      var totalPembayaran = thr - pph;
+
+      // tampilkan hasil
+      document.getElementById("result").innerHTML = "Total Gaji: " + totalGaji + "<br>" +
+        "THR: " + thr + "<br>" +
+        "PPH: " + pph + "<br>" +
+        "Total Pembayaran: " + totalPembayaran;
+    }
+  </script>
+</body>
+</html>
+
